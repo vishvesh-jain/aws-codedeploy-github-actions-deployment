@@ -4,7 +4,7 @@ on:
   workflow_dispatch: {}
 
 env:
-  applicationfolder: spring-boot-hello-test-vj
+  applicationfolder: spring-boot-hello-world-example
   AWS_REGION: ap-south-1
   
 
