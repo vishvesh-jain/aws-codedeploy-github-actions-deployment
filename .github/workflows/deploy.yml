@@ -52,6 +52,7 @@ jobs:
         with:
           name: war-artifact
           path: ${{ env.applicationfolder }}/target/*.war
+          
       #- name: Upload Artifact to s3
         #working-directory: ${{ env.applicationfolder }}/target
         #run: aws s3 cp *.war s3://${{ env.S3BUCKET }}/
@@ -75,7 +76,8 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v2
       with:
-          name: java-app
+          name: war-artifact
+
           
     - name: Running test commands
       run : |
