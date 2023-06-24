@@ -4,9 +4,9 @@ on:
   workflow_dispatch: {}
 
 env:
-  applicationfolder: spring-boot-hello-world-example
-  AWS_REGION: ##region##
-  S3BUCKET: ##s3-bucket## 
+  applicationfolder: spring-boot-hello-test-vj
+  AWS_REGION: ap-south-1
+  
 
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
           role-session-name: GitHub-Action-Role
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ap-south-1
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
@@ -39,9 +39,9 @@ jobs:
         working-directory: ${{ env.applicationfolder }}
         run: $GITHUB_WORKSPACE/.github/scripts/build.sh
 
-      - name: Upload Artifact to s3
-        working-directory: ${{ env.applicationfolder }}/target
-        run: aws s3 cp *.war s3://${{ env.S3BUCKET }}/
+      #- name: Upload Artifact to s3
+        #working-directory: ${{ env.applicationfolder }}/target
+        #run: aws s3 cp *.war s3://${{ env.S3BUCKET }}/
         
   deploy:
     needs: build
@@ -60,4 +60,4 @@ jobs:
     - run: |
         echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
         commit_hash=`git rev-parse HEAD`
-        aws deploy create-deployment --application-name CodeDeployAppNameWithASG --deployment-group-name CodeDeployGroupName --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
+        aws deploy create-deployment --application-name Sample-Spring --deployment-group-name Sample-GithubV2 --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
