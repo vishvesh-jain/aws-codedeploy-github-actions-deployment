@@ -47,6 +47,11 @@ jobs:
         working-directory: ${{ env.applicationfolder }}
         run: $GITHUB_WORKSPACE/.github/scripts/build.sh
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: war-artifact
+          path: ${{ env.applicationfolder }}/target/*.war
       #- name: Upload Artifact to s3
         #working-directory: ${{ env.applicationfolder }}/target
         #run: aws s3 cp *.war s3://${{ env.S3BUCKET }}/
@@ -67,7 +72,18 @@ jobs:
     - name: Install jq
       run: |
           sudo apt-get install -y jq
-      
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+          name: java-app
+          
+    - name: Running test commands
+      run : |
+       ls -lhtra .
+       echo $pwd
+       echo $hostname
+       echo $whoami
+    
     - name: Configure AWS credentials
       run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
