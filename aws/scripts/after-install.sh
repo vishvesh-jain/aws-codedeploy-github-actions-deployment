@@ -11,9 +11,7 @@ set -xe
 
 #cp "$latest_war" /usr/local/tomcat9/webapps/SpringBootHelloWorldExampleApplication.war
 
-# Ensure the ownership permissions are correct.
 
-cd ../../..
 
 # Find the highest existing subfolder number
 highest_number=$(find /installs -maxdepth 1 -type d -name 'CHG*' | grep -o '[0-9]*' | sort -rn | head -n 1)
@@ -26,6 +24,6 @@ new_folder="/installs/CHG$new_number"
 mkdir "$new_folder"
 
 # Copy contents from /tmp to the new subfolder
-cp -r ../../../* "$new_folder"
+cp -r /installs/tmp/* "$new_folder"
 chown -R ec2-user:user "$new_folder"
 
