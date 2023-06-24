@@ -3,6 +3,8 @@ os: linux
 files:
   - source: /aws
     destination: /usr/local/codedeployresources
+  - source: /spring-boot-hello-world-example
+    destination: /installs/tmp
 hooks:
   ApplicationStop:
     - location: aws/scripts/application-stop.sh
