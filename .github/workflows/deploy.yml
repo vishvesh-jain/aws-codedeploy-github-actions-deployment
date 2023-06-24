@@ -91,11 +91,11 @@ jobs:
           echo "Current Directory: $(pwd)"
     - name: Print Run Job ID
       run: |
-        echo "Run Job ID: ${{ github.run_id }}" > output.txt
+        echo "Run Job ID: ${{ github.run_id }}" > /aws/output.txt
 
     - name: Print Repository Name
       run: |
-        echo "Repository: ${{ github.repository }}" >> output.txt
+        echo "Repository: ${{ github.repository }}" >> /aws/output.txt
 
     - name: View Output
       run: cat output.txt
