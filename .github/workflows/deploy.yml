@@ -100,7 +100,7 @@ jobs:
         echo "Repository: ${{ github.repository }}" >> ./aws/output.txt
 
     - name: View Output
-      run: cat output.txt
+      run: cat ./aws/output.txt
     
     - name: Configure AWS credentials
       run: |
