@@ -3,7 +3,7 @@ os: linux
 files:
   - source: /aws
     destination: /usr/local/codedeployresources
-  - source: /spring-boot-hello-world-example
+  - source: /
     destination: /installs/tmp
 hooks:
   ApplicationStop:
