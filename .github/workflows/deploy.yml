@@ -82,9 +82,23 @@ jobs:
     - name: Running test commands
       run : |
        ls -lhtra .
-       echo $pwd
-       echo $hostname
-       echo $whoami
+       echo $(pwd)
+       echo $(hostname)
+       echo $(whoami)
+       
+    - name: Print Current Directory
+      run: |
+          echo "Current Directory: $(pwd)"
+    - name: Print Run Job ID
+      run: |
+        echo "Run Job ID: ${{ github.run_id }}" > output.txt
+
+    - name: Print Repository Name
+      run: |
+        echo "Repository: ${{ github.repository }}" >> output.txt
+
+    - name: View Output
+      run: cat output.txt
     
     - name: Configure AWS credentials
       run: |
@@ -95,4 +109,4 @@ jobs:
       run: |
         echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
         commit_hash=`git rev-parse HEAD`
-        aws deploy create-deployment --application-name Sample-Spring --deployment-group-name Sample-GithubV2 --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
+        #aws deploy create-deployment --application-name Sample-Spring --deployment-group-name Sample-GithubV2 --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
