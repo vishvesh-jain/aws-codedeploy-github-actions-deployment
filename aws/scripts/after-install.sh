@@ -25,5 +25,5 @@ mkdir "$new_folder"
 
 # Copy contents from /tmp to the new subfolder
 cp -r /installs/tmp/* "$new_folder"
-chown -R ec2-user:user "$new_folder"
+chown -R ec2-user:ec2-user "$new_folder"
 
