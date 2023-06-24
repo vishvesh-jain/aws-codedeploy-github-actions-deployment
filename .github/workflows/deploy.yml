@@ -85,17 +85,19 @@ jobs:
        echo $(pwd)
        echo $(hostname)
        echo $(whoami)
-       
+     
+    - name: Create Directory
+      run: mkdir -p ./aws
     - name: Print Current Directory
       run: |
           echo "Current Directory: $(pwd)"
     - name: Print Run Job ID
       run: |
-        echo "Run Job ID: ${{ github.run_id }}" > /aws/output.txt
+        echo "Run Job ID: ${{ github.run_id }}" > ./aws/output.txt
 
     - name: Print Repository Name
       run: |
-        echo "Repository: ${{ github.repository }}" >> /aws/output.txt
+        echo "Repository: ${{ github.repository }}" >> ./aws/output.txt
 
     - name: View Output
       run: cat output.txt
